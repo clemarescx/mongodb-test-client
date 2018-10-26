@@ -1,6 +1,5 @@
 #[macro_use(bson, doc)]
 extern crate bson;
-// extern crate mongodb;
 extern crate ron;
 #[macro_use]
 extern crate serde;
@@ -10,9 +9,6 @@ extern crate rayon;
 use bson::oid::ObjectId;
 use bson::ordered::OrderedDocument;
 use bson::Bson;
-// use mongodb::cursor::Cursor;
-// use mongodb::db::ThreadedDatabase;
-// use mongodb::{Client, ThreadedClient};
 
 use mongo_driver::client::{Client, ClientPool, Uri};
 use mongo_driver::collection::*;
@@ -129,8 +125,6 @@ fn get_element_count() {
     let server_url = format!["mongodb://{}:{}", url, port];
 
     println!("Connecting to server {} ...", server_url);
-    // let client = Client::connect(&url, port).expect("Could not connect to server");
-    // let client = get_client(&url, port);
     let uri = Uri::new(server_url).unwrap();
     let pool = Arc::new(ClientPool::new(uri.clone(), None));
     let client = pool.pop();
